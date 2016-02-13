@@ -29,7 +29,7 @@ runAnalysis <- function() {
   if(is.null(XTest))  { XTest  <<- readData("c:/data/test/X_test.txt") }
   merged <- rbind(XTrain, XTest)
 
-  featureNames <- readData("features.txt")[, 2]
+  featureNames <- readData("c:/data/features.txt")[, 2]
   names(merged) <- featureNames
 
   # Extract only the measurements on the mean and standard deviation for each measurement.
@@ -39,8 +39,8 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  yTrain <- read("c:/train/y_train.txt")
-  yTest  <- read("c:/test/y_test.txt")
+  yTrain <- read("c:/data/train/y_train.txt")
+  yTest  <- read("c:/data/test/y_test.txt")
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -58,8 +58,8 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  subjectTrain <- read("c:/train/subject_train.txt")
-  subjectTest  <- read("c:/test/subject_test.txt")
+  subjectTrain <- read("c:/data/train/subject_train.txt")
+  subjectTest  <- read("c:/data/test/subject_test.txt")
   subjects <- rbind(subjectTrain, subjectTest)[, 1]
 
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
