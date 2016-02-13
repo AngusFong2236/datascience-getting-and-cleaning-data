@@ -1,3 +1,4 @@
+XTrain <- XTest <- NULL
 runAnalysis <- function() {
   # Get and extract data
 
@@ -5,12 +6,12 @@ runAnalysis <- function() {
 
   downloadData <- function() {
     url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-    downloadDir <- "c:/data"
+    downloadDir <- "data"
 
     zipFile <- filePath(downloadDir, "dataset.zip")
     if(!file.exists(zipFile)) { download.file(url, zipFile, method = "curl") }
 
-    dataDir <- "UCI HAR Dataset"
+    dataDir <- "c:/data"
     if(!file.exists(dataDir)) { unzip(zipFile, exdir = ".") }
 
     dataDir
@@ -25,11 +26,11 @@ runAnalysis <- function() {
   }
 
   # Read and cache XTrain and XTest data
-  if(is.null(XTrain)) { XTrain <<- readData("c:/data/train/X_train.txt") }
-  if(is.null(XTest))  { XTest  <<- readData("c:/data/test/X_test.txt") }
+  if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
+  if(is.null(XTest))  { XTest  <<- readData("test/X_test.txt") }
   merged <- rbind(XTrain, XTest)
 
-  featureNames <- readData("c:/data/features.txt")[, 2]
+  featureNames <- readData("features.txt")[, 2]
   names(merged) <- featureNames
 
   # Extract only the measurements on the mean and standard deviation for each measurement.
@@ -39,8 +40,8 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  yTrain <- read("c:/data/train/y_train.txt")
-  yTest  <- read("c:/data/test/y_test.txt")
+  yTrain <- read("train/y_train.txt")
+  yTest  <- read("test/y_test.txt")
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -58,8 +59,8 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  subjectTrain <- read("c:/data/train/subject_train.txt")
-  subjectTest  <- read("c:/data/test/subject_test.txt")
+  subjectTrain <- read("train/subject_train.txt")
+  subjectTest  <- read("test/subject_test.txt")
   subjects <- rbind(subjectTrain, subjectTest)[, 1]
 
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
@@ -72,7 +73,7 @@ runAnalysis <- function() {
   names(tidyMeans)[-c(1,2)] <- paste0("Mean", names(tidyMeans)[-c(1,2)])
 
   # Write file
-  write.table(tidyMeans, "c:\tidyMeans.txt", row.names = FALSE)
+  write.table(tidyMeans, "tidyMeans.txt", row.names = FALSE)
 
   # Also return data
   tidyMeans
