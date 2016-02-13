@@ -25,8 +25,8 @@ runAnalysis <- function() {
   }
 
   # Read and cache XTrain and XTest data
-  if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
-  if(is.null(XTest))  { XTest  <<- readData("test/X_test.txt") }
+  if(is.null(XTrain)) { XTrain <<- readData("c:/data/train/X_train.txt") }
+  if(is.null(XTest))  { XTest  <<- readData("c:/data/test/X_test.txt") }
   merged <- rbind(XTrain, XTest)
 
   featureNames <- readData("features.txt")[, 2]
@@ -39,8 +39,8 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  yTrain <- read("train/y_train.txt")
-  yTest  <- read("test/y_test.txt")
+  yTrain <- read("c:/train/y_train.txt")
+  yTest  <- read("c:/test/y_test.txt")
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -58,8 +58,8 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  subjectTrain <- read("train/subject_train.txt")
-  subjectTest  <- read("test/subject_test.txt")
+  subjectTrain <- read("c:/train/subject_train.txt")
+  subjectTest  <- read("c:/test/subject_test.txt")
   subjects <- rbind(subjectTrain, subjectTest)[, 1]
 
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
@@ -72,7 +72,7 @@ runAnalysis <- function() {
   names(tidyMeans)[-c(1,2)] <- paste0("Mean", names(tidyMeans)[-c(1,2)])
 
   # Write file
-  write.table(tidyMeans, "tidyMeans.txt", row.names = FALSE)
+  write.table(tidyMeans, "c:\tidyMeans.txt", row.names = FALSE)
 
   # Also return data
   tidyMeans
