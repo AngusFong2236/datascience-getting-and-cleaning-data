@@ -73,13 +73,13 @@ runAnalysis <- function() {
   names(tidyMeans)[-c(1,2)] <- paste0("Mean", names(tidyMeans)[-c(1,2)])
 
   # Write file
-  write.table(tidyMeans, "tidyMeans.txt", row.names = FALSE)
+  write.table(tidyMeans, "tidy_projWork.txt", row.names = FALSE)
 
   # Also return data
   tidyMeans
 }
 
 # Use to check that the tidyMeans.txt is properly readable
-checkData <- function() {
-  read.table("tidyMeans.txt", header = TRUE)
-}
+#checkData <- function() {
+#  read.table("tidyMeans.txt", header = TRUE)
+#}
