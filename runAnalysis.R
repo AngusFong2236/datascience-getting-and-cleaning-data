@@ -35,7 +35,8 @@ runAnalysis <- function() {
 
   merged <- rbind(XTrain, XTest)
 
-  featureNames <- readData("features.txt")[, 2]
+  #featureNames <- readData("features.txt")[, 2]
+  featureNames <- read.table("features.txt")
   names(merged) <- featureNames
 
   # Extract only the measurements on the mean and standard deviation for each measurement.
