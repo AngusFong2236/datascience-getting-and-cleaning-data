@@ -40,8 +40,8 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  yTrain <- read("train/y_train.txt")
-  yTest  <- read("test/y_test.txt")
+  yTrain <- readData("train/y_train.txt")
+  yTest  <- readData("test/y_test.txt")
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -59,8 +59,8 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  subjectTrain <- read("train/subject_train.txt")
-  subjectTest  <- read("test/subject_test.txt")
+  subjectTrain <- readData("train/subject_train.txt")
+  subjectTest  <- readData("test/subject_test.txt")
   subjects <- rbind(subjectTrain, subjectTest)[, 1]
 
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
