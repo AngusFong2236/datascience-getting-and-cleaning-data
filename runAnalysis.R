@@ -8,14 +8,12 @@ runAnalysis <- function() {
     url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
     downloadDir <- "c:/data"
 
-    #zipFile <- filePath(downloadDir, "dataset.zip")
-    #if(!file.exists(zipFile)) { download.file(url, zipFile, method = "curl")
-    if(!file.exists("dataset.zip")) { download.file(url, "dataset.zip", method = "curl")
-    }
-     
+    zipFile <- filePath(downloadDir, "dataset.zip")
+    if(!file.exists(zipFile)) { download.file(url, zipFile, method = "curl") }
+
     dataDir <- "c:/data"
-    #if(!file.exists(dataDir)) { unzip(zipFile, exdir = ".") }
-    (!file.exists("")) { unzip("dataset.zip", exdir = ".") }
+    if(!file.exists(dataDir)) { unzip(zipFile, exdir = ".") }
+
     dataDir
   }
 
