@@ -1,10 +1,13 @@
-#XTrain <- XTest <- NULL
+
 runAnalysis <- function() {
-  # Get and extract data
+  
 
   filePath <- function(...) { paste(..., sep = "/") }
 
   downloadData <- function() {
+  # download datafile if it not already exist
+  
+  
     url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
     downloadDir <- "c:/data"
 
@@ -20,23 +23,14 @@ runAnalysis <- function() {
 
   dataDir <- downloadData()
 
-  # Merge the training and the test sets to create one data set.
+  # Merge 2 datasets (training, test) to merged dataset.
 
-#  readData <- function(path) {
-#    read.table(filePath(dataDir, path))
-#  }
 
-  # Read and cache XTrain and XTest data
-  # if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
-  # if(is.null(XTest))  { XTest  <<- readData("test/X_test.txt") }
-  #XTrain <<- readData("train/X_train.txt")
-  #XTest  <<- readData("test/X_test.txt")
   XTrain <<- read.table("train/X_train.txt")
   XTest  <<- read.table("test/X_test.txt")
-
   merged <- rbind(XTrain, XTest)
 
-  #featureNames <- readData("features.txt")[, 2]
+
   featureNames <- read.table("features.txt")[, 2]
   names(merged) <- featureNames
 
@@ -47,12 +41,9 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  # yTrain <- readData("train/y_train.txt")
-  # yTest  <- readData("test/y_test.txt")
-  
+
   yTrain <- read.table("train/y_train.txt")
   yTest  <- read.table("test/y_test.txt")
-  
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -70,8 +61,7 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  #subjectTrain <- readData("train/subject_train.txt")
-  #subjectTest  <- readData("test/subject_test.txt")
+  
   subjectTrain <- read.table("train/subject_train.txt")
   subjectTest  <- read.table("test/subject_test.txt")
   
@@ -89,11 +79,6 @@ runAnalysis <- function() {
   # Write file
   write.table(tidyMeans, "tidy_projWork.txt", row.names = FALSE)
 
-  # Also return data
-  #tidyMeans
 }
 
-# Use to check that the tidyMeans.txt is properly readable
-#checkData <- function() {
-#  read.table("tidyMeans.txt", header = TRUE)
-#}
+
