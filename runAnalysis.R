@@ -21,9 +21,9 @@ runAnalysis <- function() {
 
   # Merge the training and the test sets to create one data set.
 
-  readData <- function(path) {
-    read.table(filePath(dataDir, path))
-  }
+#  readData <- function(path) {
+#    read.table(filePath(dataDir, path))
+#  }
 
   # Read and cache XTrain and XTest data
   # if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
@@ -79,7 +79,7 @@ runAnalysis <- function() {
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
 
   # Create a second, independent tidy data set with the average of each variable for each activity and each subject.
-  library(plyr)
+ # library(plyr)
   # Column means for all but the subject and activity columns
   limitedColMeans <- function(data) { colMeans(data[,-c(1,2)]) }
   tidyMeans <- ddply(tidy, .(Subject, Activity), limitedColMeans)
