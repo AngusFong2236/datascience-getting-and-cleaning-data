@@ -28,8 +28,11 @@ runAnalysis <- function() {
   # Read and cache XTrain and XTest data
   # if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
   # if(is.null(XTest))  { XTest  <<- readData("test/X_test.txt") }
-  XTrain <<- readData("train/X_train.txt")
-  XTest  <<- readData("test/X_test.txt")
+  #XTrain <<- readData("train/X_train.txt")
+  #XTest  <<- readData("test/X_test.txt")
+  XTrain <<- read.table("train/X_train.txt")
+  XTest  <<- read.table("test/X_test.txt")
+
   merged <- rbind(XTrain, XTest)
 
   featureNames <- readData("features.txt")[, 2]
