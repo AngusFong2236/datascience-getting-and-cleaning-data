@@ -9,7 +9,8 @@ runAnalysis <- function() {
     downloadDir <- "c:/data"
 
     zipFile <- filePath(downloadDir, "dataset.zip")
-    if(!file.exists(zipFile)) { download.file(url, zipFile, method = "curl") }
+    #if(!file.exists(zipFile)) { download.file(url, zipFile, method = "curl") }
+    download.file("dataset.zip", zipFile, method = "curl") 
 
     dataDir <- "c:/data"
     if(!file.exists(dataDir)) { unzip(zipFile, exdir = ".") }
