@@ -1,7 +1,10 @@
 # Project Codebook
 
 ## list of variables
-
+zipFile - name of datafile in zip format
+merged - combindate Train and test dataset for feature use
+ymerged - combindate Train ans test dataset for activity use
+tidyMeans - Column means for for activity and each subject.
 
 ## "1. Download and unzip datafile, if it not already exist" 
 ## "2. Merges 2 datasets (training test) into one dataset merged."
