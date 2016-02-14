@@ -21,9 +21,9 @@ runAnalysis <- function() {
 
   # Merge the training and the test sets to create one data set.
 
-  readData <- function(path) {
-    read.table(filePath(dataDir, path))
-  }
+  #readData <- function(path) {
+  #  read.table(filePath(dataDir, path))
+  #}
 
   # Read and cache XTrain and XTest data
   # if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
@@ -45,8 +45,12 @@ runAnalysis <- function() {
 
   # Use descriptive activity names to name the activities in the data set.
   # Get the activity data and map to nicer names:
-  yTrain <- readData("train/y_train.txt")
-  yTest  <- readData("test/y_test.txt")
+  # yTrain <- readData("train/y_train.txt")
+  # yTest  <- readData("test/y_test.txt")
+  
+  yTrain <- read.table("train/y_train.txt")
+  yTest  <- read.table("test/y_test.txt")
+  
   yMerged <- rbind(yTrain, yTest)[, 1]
 
   activityNames <-
@@ -64,8 +68,11 @@ runAnalysis <- function() {
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
   # Add activities and subject with nice names
-  subjectTrain <- readData("train/subject_train.txt")
-  subjectTest  <- readData("test/subject_test.txt")
+  #subjectTrain <- readData("train/subject_train.txt")
+  #subjectTest  <- readData("test/subject_test.txt")
+  subjectTrain <- read.table("train/subject_train.txt")
+  subjectTest  <- read.table("test/subject_test.txt")
+  
   subjects <- rbind(subjectTrain, subjectTest)[, 1]
 
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
