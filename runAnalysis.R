@@ -21,9 +21,9 @@ runAnalysis <- function() {
 
   # Merge the training and the test sets to create one data set.
 
-  #readData <- function(path) {
-  #  read.table(filePath(dataDir, path))
-  #}
+  readData <- function(path) {
+    read.table(filePath(dataDir, path))
+  }
 
   # Read and cache XTrain and XTest data
   # if(is.null(XTrain)) { XTrain <<- readData("train/X_train.txt") }
@@ -36,7 +36,7 @@ runAnalysis <- function() {
   merged <- rbind(XTrain, XTest)
 
   #featureNames <- readData("features.txt")[, 2]
-  featureNames <- read.table("features.txt")
+  featureNames <- read.table("features.txt")[, 2]
   names(merged) <- featureNames
 
   # Extract only the measurements on the mean and standard deviation for each measurement.
