@@ -40,7 +40,7 @@ runAnalysis <- function() {
   limited <- merged[, matches]
 
   # Use descriptive activity names to name the activities in the data set.
-  # Get the activity data and map to nicer names:
+  # Get the activity data
 
   yTrain <- read.table("train/y_train.txt")
   yTest  <- read.table("test/y_test.txt")
@@ -60,7 +60,7 @@ runAnalysis <- function() {
   names(limited) <- gsub("-", "", names(limited))
   names(limited) <- gsub("BodyBody", "Body", names(limited))
 
-  # Add activities and subject with nice names
+  # Add activities and subject
   
   subjectTrain <- read.table("train/subject_train.txt")
   subjectTest  <- read.table("test/subject_test.txt")
@@ -70,13 +70,12 @@ runAnalysis <- function() {
   tidy <- cbind(Subject = subjects, Activity = activities, limited)
 
   # Create a second, independent tidy data set with the average of each variable for each activity and each subject.
- # library(plyr)
-  # Column means for all but the subject and activity columns
+  # Column means for for activity and each subject.
   limitedColMeans <- function(data) { colMeans(data[,-c(1,2)]) }
   tidyMeans <- ddply(tidy, .(Subject, Activity), limitedColMeans)
   names(tidyMeans)[-c(1,2)] <- paste0("Mean", names(tidyMeans)[-c(1,2)])
 
-  # Write file
+  # Output to file
   write.table(tidyMeans, "tidy_projWork.txt", row.names = FALSE)
 
 }
