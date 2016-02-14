@@ -1,4 +1,4 @@
-XTrain <- XTest <- NULL
+#XTrain <- XTest <- NULL
 runAnalysis <- function() {
   # Get and extract data
 
@@ -76,7 +76,7 @@ runAnalysis <- function() {
   write.table(tidyMeans, "tidy_projWork.txt", row.names = FALSE)
 
   # Also return data
-  tidyMeans
+  #tidyMeans
 }
 
 # Use to check that the tidyMeans.txt is properly readable
